@@ -32,3 +32,29 @@ if st.button("Predict Next Word"):
     next_word = predict_next_word(model, tokenizer, input_text, max_sequence_len)
     st.write(f'Next word: {next_word}')
 
+if 'my_list' not in st.session_state:
+    st.session_state.my_list = []
+
+# Add an item to the list
+if st.button('Add Item'):
+    st.session_state.my_list.append("New Item")
+
+# Try to pop an item
+if 'my_list' not in st.session_state:
+    st.session_state.my_list = []
+
+# Button to add an item to the list with a unique key
+if st.button('Add Item', key='add_item_button'):
+    st.session_state.my_list.append("New Item")
+    st.success("Item added!")
+
+# Button to pop an item from the list with a unique key
+if st.button('Pop Item', key='pop_item_button'):
+    if st.session_state.my_list:  # Ensure the list is not empty
+        popped_item = st.session_state.my_list.pop()
+        st.success(f"Popped: {popped_item}")
+    else:
+        st.warning("No items to pop from the list!")
+
+# Display current list
+st.write("Current List:", st.session_state.my_list)
